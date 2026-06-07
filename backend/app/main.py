@@ -1,17 +1,15 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database.database import Base, engine
-from app.routes import auth, records, prices, admin
-
-# Import all models so SQLAlchemy registers table metadata before create_all()
-from app.models import user, extraction, sales, expenses, transport, incident, mineral_price, news, buyer
+from app.routes import auth, transactions, rates
+from app.models import user, transaction, rate
 
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
-    title="Mining System DRC",
-    description="Artisanal Mining Record & Market Intelligence System",
-    version="1.0.0"
+    title="Mining Company DRC",
+    description="Internal Mineral Transaction Management System",
+    version="2.0.0"
 )
 
 app.add_middleware(
@@ -23,10 +21,9 @@ app.add_middleware(
 )
 
 app.include_router(auth.router)
-app.include_router(records.router)
-app.include_router(prices.router)
-app.include_router(admin.router)
+app.include_router(transactions.router)
+app.include_router(rates.router)
 
 @app.get("/")
 def root():
-    return {"message": "Mining System DRC API is running"}
+    return {"message": "Mining Company DRC API is running"}
