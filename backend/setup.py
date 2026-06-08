@@ -16,14 +16,14 @@ if not existing:
     user = User(
         full_name="Mining Operator",
         email="safiaactive@gmail.com",
-        hashed_password=hash_password("Ac12345@!"),
+        hashed_password=hash_password("admin123"),
         is_admin=True
     )
     db.add(user)
     db.commit()
     print("✅ Account created!")
     print("Email: safiaactive@gmail.com")
-    print("Password: Ac12345@!")
+    print("Password: admin123")
 else:
     print("✅ Account already exists!")
 
