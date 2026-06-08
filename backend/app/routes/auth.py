@@ -2,15 +2,14 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
 from jose import jwt
-from passlib.context import CryptContext
 from app.database.database import get_db
 from app.models.user import User
 from app.config import settings
 from app.utils.auth import get_current_user
 from pydantic import BaseModel
+import hashlib
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 class LoginIn(BaseModel):
     email: str
@@ -20,8 +19,11 @@ class Token(BaseModel):
     access_token: str
     token_type: str
 
+def hash_password(password: str):
+    return hashlib.sha256(password.encode()).hexdigest()
+
 def verify_password(plain, hashed):
-    return pwd_context.verify(plain, hashed)
+    return hashlib.sha256(plain.encode()).hexdigest() == hashed
 
 def create_token(data: dict):
     to_encode = data.copy()
