@@ -30,7 +30,7 @@ function Login() {
         <div style={{textAlign:'center', marginBottom:'30px'}}>
           <div style={{fontSize:'48px'}}>⛏️</div>
           <h1 style={{fontSize:'24px', fontWeight:'bold', color:'#1a3a5c'}}>MineTrack DRC</h1>
-          <p style={{color:'#888', fontSize:'14px'}}>Mineral Transaction System</p>
+          <p style={{color:'#888', fontSize:'14px'}}>Mineral Transaction System v2</p>
         </div>
         {error && <div style={styles.error}>{error}</div>}
         <form onSubmit={handleSubmit} style={{display:'flex', flexDirection:'column', gap:'16px'}}>
