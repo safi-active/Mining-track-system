@@ -19,7 +19,8 @@ function Login() {
       localStorage.setItem('user', JSON.stringify(userRes.data));
       navigate('/dashboard');
     } catch (err) {
-      setError('Invalid credentials. Please try again.');
+      const message = err?.response?.data?.detail || err?.response?.data?.message || err?.response?.statusText || err?.message || 'Invalid credentials. Please try again.';
+      setError(message);
     }
     setLoading(false);
   };
